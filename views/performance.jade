@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  include navigator.jade
+  header#top.header
+    .text-vertical-center
+
+      h1 Measure Performance
+      br
+      p Duration(seconds)
+      input#duration
+      br
+      p Interval(milliseconds)
+      input#interval
+      br
+      br
+      div#result
+      p POST requests completed/s
+      p#postresult
+      br
+      p GET requests completed/s
+      p#getresult
+      br
+      button.btn.btn-primary(type='submit' onclick='startMeasurement()') start
+      button.btn.btn-primary(type='submit' onclick='stopMeasurement()') stop
+      br
+
+
+
+  script(src='js/cookies.js')
+  script(src='http://code.jquery.com/jquery-1.11.1.js')
+  script(src='/socket.io/socket.io.js')
+  script(src='js/performance.js')
+  

@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  include navigator
+  header#top.header
+    .text-vertical-center
+      .list-group(style='width:50%; margin:auto')
+        h1 Announcements
+        br
+
+        ul#messagelist
+          each msg in result
+            li#msg
+              b(style='float:left; font-size:150%;')=msg.username
+              p(style='float:right')=msg.timestamp
+              br
+              h3=msg.message
+              hr
+        br
+        
+        form#chatpage(style='width: 50%; margin: auto')
+          fieldset.form-group
+            label Input your messages here :)
+            input.form-control(id='messages', type='text', placeholder='Messages')
+          button.btn.btn-primary(type='submit') SEND
+
+
+  script(src='js/cookies.js')
+  script(src='http://code.jquery.com/jquery-1.11.1.js')
+  script(src='/socket.io/socket.io.js')
+  script(src='js/announce.js')

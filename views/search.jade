@@ -1,0 +1,114 @@
+extends layout
+
+block content
+  include navigator
+  header#top.header
+    .text-vertical-center
+    
+      if (locals.failure) 
+        .alert.alert-danger(style='width:20%; margin:auto')
+          a.close(href='#', data-dismiss='alert', aria-label='close') ×
+          strong #{message}
+
+    
+      h1  Search
+      if (locals.others)
+        form.form-signin(style='width:30%; margin:auto;', action='/search', method='post', enctype='application/json')
+          .radio(style='float:left;', required='')
+            label(style='font-size:200%')
+              input(type='radio', name='target', value='Users')
+              | User
+          div(style='float:left;')
+            input#username.form-control.input-lg(type='text', placeholder='Name', name='username')
+            
+          br(style='clear:both;')
+          
+          .radio(style='float:left;')
+            label(style='font-size:200%')
+              input(type='radio', name='target', value='Status')
+              | Status
+          .form-group(style='float:left;')
+            select#code.form-control(name='code')
+              option(selected='', disabled='') Codes
+              option OK
+              option Help
+              option Emergency
+              
+          br(style='clear:both;')
+          
+          .radio(style='float:left;')
+            label(style='font-size:200%')
+              input(type='radio', name='target', value='Announcements')
+              | Announcements
+          div(style='float:left;')
+            input#Announcements.form-control.input-lg(type='text', placeholder='Keywords', name='keyword')
+          
+          br(style='clear:both;')
+
+          .radio(style='float:left;')
+            label(style='font-size:200%')
+              input(type='radio', name='target', value='Public')
+              | Public Messages
+          div(style='float:left;')
+            input#Public.form-control.input-lg(type='text', placeholder='Keywords', name='keyword')
+            
+          br(style='clear:both;')
+          
+          .radio(style='float:left;')
+            label(style='font-size:200%')
+              input(type='radio', name='target', value='Private')
+              | Private Messages
+          .form-group(style='float:left;')
+            select#others.form-control(name='others')
+              option(selected='', disabled='') Users
+              each user in others
+                if (user.username != current)
+                  option=user.username
+
+          div(style='float:left;')
+            input#Private.form-control.input-lg(type='text', placeholder='Keywords', name='keyword')
+          br(style='clear:both;')
+          button.btn.btn-lg.btn-primary.btn-block(type='submit', style='width:50%; margin:auto') Search
+
+      br
+      if (locals.users)
+        table(style='width:20%; margin:auto')
+          each user in users
+            tr 
+              td 
+                a.btn.btn-dark.btn-lg.home-items=user.username 
+              td
+        br
+        a.btn.btn-dark.btn-lg.home-items(href='/search') Search Again                     
+              
+      if (locals.status)
+        table(style='width:20%; margin:auto')
+          each user in status
+            tr 
+              td 
+                a.btn.btn-dark.btn-lg.home-items=user.username 
+              td 
+                if (!user.status) 
+                  a.btn.btn-dark.btn-lg.home-items(disabled='')="Status not set"
+                else
+                  a.btn.btn-dark.btn-lg.home-items=user.status
+              td 
+        br
+        a.btn.btn-dark.btn-lg.home-items(href='/search') Search Again                     
+
+      if (locals.msgs)
+        ul(style='width:50%; margin:auto')#messagelist
+          each msg in msgs
+            li#msg
+              b(style='float:left; font-size:150%;')=msg.username
+              if msg.sender
+                b(style='float:left; font-size:150%;')=msg.sender
+              p(style='float:right')=msg.timestamp
+              br
+              h3=msg.message
+              hr
+              
+        br
+        a.btn.btn-dark.btn-lg.home-items(href='/search') Search Again       
+              
+

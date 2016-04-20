@@ -1,0 +1,39 @@
+doctype html
+html(lang='en')
+  include navigator
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title #{title}
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/stylish-portfolio.css', rel='stylesheet')
+    link(href='css/home.css', rel='stylesheet')
+    link(href='font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic', rel='stylesheet', type='text/css')
+    script(src='js/cookies.js')
+    script(src='http://code.jquery.com/jquery-1.11.1.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='js/chat.js')
+
+  body
+    header#top.header
+   
+      .list-group(style='width:50%; margin:auto')
+        h1(style='text-align:center') Public Chat
+        a#newmessagenotification(style='color:blue')
+        br
+        div
+          textarea(rows="4", cols="50", placeholder="Post something!")#outgoingMessage
+          br
+          input.btn.btn-primary(type="button", value="Post", onclick="sendpublicmessage()")#send
+        br
+        div#messages
+          each msg in result
+            b(style='float:left')=msg.username
+            b(style='float:right')=msg.timestamp
+            br
+            h=msg.message
+            hr
+        
+  

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  include navigator
+  header#top.header
+    .text-vertical-center
+      h1  Set Status 
+      br
+
+      form.form-signin(style='width:30%; margin:auto;', action='/status', method='post', enctype='application/json')
+        .radio
+          label(style="font-size:200%")
+            input(type='radio', name='status', value='OK')
+            | OK
+        .radio
+          label(style="font-size:200%")
+            input(type='radio', name='status', value="Help")
+            | Help
+        .radio
+          label(style="font-size:200%")
+            input(type='radio', name='status', value="Emergency")
+            | Emergency
+        br
+        button.btn.btn-primary(type='submit', style='margin:auto') Submit

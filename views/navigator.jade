@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    
+
+  body
+    ul#nav
+      li
+        a(href='/users') Directory
+      li
+        a(href='/chat') Public Chat
+      li(style="display:inline")#announcements
+        a(href='/announce') Announcements
+      li 
+        a(href='/status') Status
+      li 
+        a(href='/search') Search
+      li(style="display:inline")#performance
+        a(href='/measure') Performance
+      li(style="display:inline")#administer
+        a(href='/administer') Administer
+      li#logout
+        a(href='/logout') Log Out
+
+
+link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans')
+script(src='//code.jquery.com/jquery-1.11.0.min.js')
+script(src='js/cookies.js')
+script(src='js/navigator.js')

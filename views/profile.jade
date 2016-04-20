@@ -1,0 +1,62 @@
+extends layout
+
+block content
+  include navigator
+  header#top.header
+    .text-vertical-center
+
+      if (locals.success)
+        .alert.alert-success(style='width:20%; margin:auto')
+          a.close(href='/users', data-dismiss='alert', aria-label='close') ×
+          strong #{message}
+      if(locals.failure)
+        .alert.alert-danger(style='width:20%; margin:auto')
+          a.close(href='/login', data-dismiss='alert', aria-label='close') ×
+          strong #{message}
+
+      div
+        h1(style='display:inline') Edit 
+        h1#oldusername(style='display:inline') #{oldusername} 
+        h1(style='display:inline') 's Profile
+      br
+      form.form-signin(action='/finishprofile', method='post', style='width:60%; margin:auto;', enctype='application/json')
+        h3 Account Status
+        input(type='radio', name='accountstatus', value='active')#active
+        h Active
+        br
+        input(type='radio', name='accountstatus', value='inactive')#inactive
+        h Inactive
+        br
+        br
+        h3 Privilege Level
+        input(type='radio', name='privilegelevel', value='administrator')#administrator
+        h Administrator
+        br
+        input(type='radio', name='privilegelevel', value='coordinator')#coordinator
+        h Coordinator
+        br
+        input(type='radio', name='privilegelevel', value='monitor')#monitor
+        h Monitor
+        br
+        input(type='radio', name='privilegelevel', value='citizen')#citizen
+        h Citizen
+        br
+        br
+        h Username
+        input#username.form-control.input-lg(type='text', pattern='.{3,}', required='', title='At least 3 characters', style='width:30%;margin:auto;', name='username')
+        br
+        h Password
+        input#password.form-control.input-lg(type='password', pattern='.{4,}', required='', title='At least 4 characters', style='width:30%;margin:auto;', name='password')
+        br
+        br
+        input(type='submit', value='Submit')
+        input(type='button', value='Cancel')#cancel
+
+
+
+        
+
+  script(src='http://code.jquery.com/jquery-1.11.1.js')
+  script(src='/socket.io/socket.io.js')
+  script(src='js/profile.js')
+
